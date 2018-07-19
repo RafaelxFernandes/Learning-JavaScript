@@ -1,5 +1,4 @@
 var Livro = function(nome, editora, autor){
-	Capitulo.call(this, nome, editora, autor);
 	
 	var nome = nome;
 	var editora = editora;
@@ -7,23 +6,33 @@ var Livro = function(nome, editora, autor){
 
 	var capitulos = [];
 
-	var totalDePaginasPorCapitulo = capitulos.map( (valor) => valor*capitulo.numPaginas);
-
 	this.getNome = () => nome;
 	this.getEditora = () => editora;
 	this.getAutor = () => autor;
 
-	this.getNumCapitulos = () => capitulos.length + 1;
+	this.getNumCapitulos = () => capitulos.length;
 
-	this.getNumPaginasLivro = () => capitulos.reduce((total, atual) => total + atual, 0);
+	this.getNumPaginasLivro = () => capitulos.reduce((total, atual) => total + atual.getNumPaginas(), 0);
 
-	this.getCapitulo = (numCapitulo) => capitulos[numCapitulo];
-
-	 this.addCapitulo = (capitulo) => capitulos.push(capitulo);
+	this.addCapitulo = (capitulo) => capitulos.push(capitulo);
 }
 
 var Capitulo = function(titulo, numPaginas){
 
 	var titulo = titulo;
 	var numPaginas = numPaginas;
+
+	this.getTitulo = () => titulo;
+	this.getNumPaginas = () => numPaginas;
 }
+
+var a = new Capitulo("ah", 40)
+var b = new Capitulo("aha", 30)
+var c = new Capitulo("b", 20)
+var livro = new Livro("nome", "editora", "autor")
+
+livro.addCapitulo(a)
+livro.addCapitulo(b)
+livro.addCapitulo(c)
+
+livro.getNumPaginasLivro()
